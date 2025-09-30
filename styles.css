@@ -1,0 +1,116 @@
+body {
+  background-color: black;
+  margin: 0;
+  color: #EDEDED;
+  font-family: "Poppins", sans-serif;
+}
+
+.nav-bar {
+  background-color: #1E1E1E;
+  position: fixed;
+  top: 30%;
+  left: 0;
+  width: 100px;
+  height: 40%;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+  transform: translateX(-90%);
+  border-radius: 16px;
+  border: none;
+}
+
+.nav-bar:hover {
+  transform: translateX(0);
+}
+
+.nav-button {
+  color: #EDEDED;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  background-color: #00C896;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  margin: 15px;
+  margin-left: 20px;
+  margin-right: 20px;
+  border: none;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  background-size: 50px;
+  animation: navButtonIn 0.3s ease;
+}
+
+#meals {
+    background-image: url(./assets/content_paste_44dp_FFFFFF_FILL0_wght400_GRAD0_opsz48.svg);
+}
+
+#stats {
+  background-image: url(./assets/donut-chart.svg);
+}
+
+#news {
+  background-image: url(./assets/news.svg);
+}
+
+.nav-button:hover {
+  animation: navButtonOut 0.3s ease forwards;
+}
+
+.nav-text {
+  opacity: 0;
+  width: 0;
+  transition: all 0.3s;
+}
+
+.nav-button:hover .nav-text {
+  transform: translateX(-50%);
+  text-align: left;
+  width: 25%;
+  opacity: 1;
+}
+
+.tab {
+  height: 100vh;
+  width: 100vw;
+  background-color: #121212;
+  display: none;
+  margin: 0;
+  overflow: hidden;
+}
+
+.tab.show {
+  display: block;
+}
+
+
+@keyframes navButtonOut {
+  0% {
+    width: calc(100% - 40px);
+    scale: 1;
+    background-position: center;
+  }
+  100% {
+    width: 200%;
+    scale: 1.1;
+    background-position: right center;
+  }
+}
+
+@keyframes navButtonIn {
+  0% {
+    width: 200%;
+    scale: 1.1;
+    background-position: right center;
+  }
+  100% {
+    width: calc(100% - 40px);
+    scale: 1;
+    background-position: center;
+  }
+}
+
