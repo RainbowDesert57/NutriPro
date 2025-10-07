@@ -79,15 +79,15 @@ navBar.classList.add("normal");
 // Uncheck the toggle once
 toggle.checked = false;
 
-const toggleBg = document.getElementById("toggleBg");
-const body = document.body;
-
-toggleBg.addEventListener("change", () => {
-  if (toggleBg.checked) {
-    // Turn ON fallback background
-      body.classList.remove("noBg");
-  } else {
-    // Turn OFF fallback background
-      body.classList.add("noBg");
-  }
-});
+// const toggleBg = document.getElementById("toggleBg");
+// const body = document.body;
+//
+// toggleBg.addEventListener("change", () => {
+//   if (toggleBg.checked) {
+//     // Turn ON fallback background
+//       body.classList.remove("noBg");
+//   } else {
+//     // Turn OFF fallback background
+//       body.classList.add("noBg");
+//   }
+// });
