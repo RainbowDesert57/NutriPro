@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skill Swap AI</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- Google Font: Poppins  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <!-- React + ReactDOM -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <!-- Babel for JSX -->
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+  <!-- Floating Menu Button -->
+<div class="floating-menu">
+  <button class="menu-button normal">⋮</button>
+  <div class="menu-dropdown normal">
+    <label class="switch">
+      <input type="checkbox" id="toggleUI">
+      <span class="slider"></span>
+      Glass Mode
+    </label>
+    <label>
+      <button type="button" class="menu-btn">Create</button>
+    </label>
+    <label>
+      <button type="button" id="logout-btn" class="menu-btn">Log Out</button>
+    </label>
+  </div>
+</div>
+
+
+  <div class="nav-bar" id="navBar">
+    <button type="button" class="nav-button normal" id="meals">
+      <span class="nav-text">Feed</span>
+    </button>
+    <button type="button" class="nav-button normal" id="stats">
+      <span class="nav-text">Stats</span>
+    </button>
+    <button type="button" class="nav-button normal" id="news">
+      <span class="nav-text">Communities</span>
+    </button>
+  </div>
+  <div class="tab normal" id="meals-tab">
+    <!-- TODO: Make the content scrollable -->
+    <div class="tab-content-container">
+      <div id="meals-grid">
+        <!-- Meal cards will be injected here -->
+      </div>
+    </div>
+  </div>
+  <div class="tab normal" id="stats-tab">
+    <div class="tab-content-container">
+      <h1>This is stats-tab</h1>
+    </div>
+  </div>
+  <div class="tab normal" id="news-tab">
+    <div class="tab-content-container">
+      <h1>This is news-tab</h1>
+    </div>
+  </div>
+  <script src="script.js"></script>
+
+  <!-- JSX -->
+  <script type="text/babel">
+    function App() {
+      const community = [
+        { name: "Graphics Design", members: 25, image: "https://picsum.photos/200?random=1" },
+        { name: "Video Editing", members: 18, image: "https://picsum.photos/200?random=2" },
+        { name: "Cooking", members: 10, image: "https://picsum.photos/200?random=3" },
+        { name: "Basket Ball", members: 30, image: "https://picsum.photos/200?random=4" },
+        { name: "Programming", members: 15, image: "https://picsum.photos/200?random=5" }
+      ];
+      
+      return (
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "16px" }}>
+          {community.map((community, i) => (
+            <div key={i} className="card">
+              <img src={community.image} alt={community.name} style={{ width: "100%", borderRadius: "10px" }} />
+              <h2>{community.name}</h2>
+              <p>{community.members} members</p>
+            </div>
+          ))}
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("meals-grid")).render(<App />);
+  </script>
+</body>
+</html>
+
