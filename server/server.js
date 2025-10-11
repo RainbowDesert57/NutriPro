@@ -82,5 +82,44 @@ app.post("/register", async (req, res) => {
   });
 });
 
+// Create new community
+app.post("/community/create", (req, res) => {
+  const { name, description, username } = req.body;
+
+  db.query("SELECT id FROM users WHERE username=?", [username], (err, results) => {
+    if (err || results.length === 0)
+      return res.status(400).json({ error: "Invalid user" });
+
+    const userId = results[0].id;
+
+    db.query(
+      "INSERT INTO communities (name, description, created_by) VALUES (?, ?, ?)",
+      [name, description, userId],
+      (err) => {
+        if (err) return res.status(500).json({ error: "Error creating community" });
+        res.json({ message: "Community created successfully" });
+      }
+    );
+  });
+});
+
+// Get all communities
+app.get("/communities", (req, res) => {
+  db.query("SELECT * FROM communities", (err, results) => {
+    if (err) return res.status(500).json({ error: "Database error" });
+    res.json(results);
+  });
+});
+
+// Get a specific community by name
+app.get("/community/:name", (req, res) => {
+  const { name } = req.params;
+  db.query("SELECT * FROM communities WHERE name=?", [name], (err, results) => {
+    if (err || results.length === 0)
+      return res.status(404).json({ error: "Community not found" });
+    res.json(results[0]);
+  });
+});
+
 app.listen(3000, () => console.log("Server running on http://localhost:3000"));
 

@@ -64,34 +64,78 @@
       <h1>This is news-tab</h1>
     </div>
   </div>
-  <script src="script.js"></script>
 
   <!-- JSX -->
-  <script type="text/babel">
-    function App() {
-      const community = [
-        { name: "Graphics Design", members: 25, image: "https://picsum.photos/200?random=1" },
-        { name: "Video Editing", members: 18, image: "https://picsum.photos/200?random=2" },
-        { name: "Cooking", members: 10, image: "https://picsum.photos/200?random=3" },
-        { name: "Basket Ball", members: 30, image: "https://picsum.photos/200?random=4" },
-        { name: "Programming", members: 15, image: "https://picsum.photos/200?random=5" }
-      ];
-      
-      return (
+<script type="text/babel">
+  function App() {
+    const communityList = [
+      { name: "Graphics Design", members: 25, image: "https://picsum.photos/200?random=1" },
+      { name: "Video Editing", members: 18, image: "https://picsum.photos/200?random=2" },
+      { name: "Cooking", members: 10, image: "https://picsum.photos/200?random=3" },
+      { name: "Basket Ball", members: 30, image: "https://picsum.photos/200?random=4" },
+      { name: "Programming", members: 15, image: "https://picsum.photos/200?random=5" }
+    ];
+
+    const [selected, setSelected] = React.useState(null);
+
+    return (
+      <div>
+        {/* GRID */}
         <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "16px" }}>
-          {community.map((community, i) => (
-            <div key={i} className="card">
-              <img src={community.image} alt={community.name} style={{ width: "100%", borderRadius: "10px" }} />
-              <h2>{community.name}</h2>
-              <p>{community.members} members</p>
+          {communityList.map((c, i) => (
+            <div
+              key={i}
+              className="card"
+              onClick={() => setSelected(c)}
+              style={{ cursor: "pointer" }}
+            >
+              <img src={c.image} alt={c.name} style={{ width: "100%", borderRadius: "10px" }} />
+              <h2>{c.name}</h2>
+              <p>{c.members} members</p>
             </div>
           ))}
         </div>
-      );
-    }
 
-    ReactDOM.createRoot(document.getElementById("meals-grid")).render(<App />);
-  </script>
+        {/* MODAL */}
+        {selected && (
+          <div style={{
+            position: "fixed",
+            top: 0, left: 0,
+            width: "100%", height: "100%",
+            background: "rgba(0,0,0,0.5)",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+            onClick={() => setSelected(null)}  // close when clicking outside
+          >
+            <div
+              className="community-modal"
+              style={{
+                background: "white",
+                padding: "20px",
+                borderRadius: "10px",
+                width: "75vw",
+                height: "75vh",
+                textAlign: "center"
+              }}
+              onClick={(e) => e.stopPropagation()}  // prevent closing when clicking inside
+            >
+              <img src={selected.image} alt={selected.name} style={{ width: "100%", height: "30%", objectFit: "cover", borderRadius: "10px" }} />
+              <h2>{selected.name}</h2>
+              <p>{selected.members} members</p>
+              <button onClick={() => setSelected(null)}>Close</button>
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  ReactDOM.createRoot(document.getElementById("meals-grid")).render(<App />);
+</script>
+
+  <script src="script.js"></script>
 </body>
 </html>
 
